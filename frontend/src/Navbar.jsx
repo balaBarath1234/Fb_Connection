@@ -29,7 +29,7 @@ const Navbar = () => {
                 {
                     menuArray.map((item,index) => {
                         return (
-                            item.access.includes(user.role) ? <NavLink to={item.path} className={({isActive}) => isActive ? "active" : "inactive" }>{item.name}</NavLink> 
+                            item.access.includes(user?.role) ? <NavLink to={item.path} className={({isActive}) => isActive ? "active" : "inactive" }>{item.name}</NavLink> 
                             : 
                             item.access.includes("all")&& <NavLink to={item.path} className={({isActive}) => isActive ? "active" : "inactive" }>{item.name}</NavLink>
                         )

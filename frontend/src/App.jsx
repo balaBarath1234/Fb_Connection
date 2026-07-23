@@ -9,6 +9,11 @@ import PrivateRoute from './PrivateRoute'
 import PublicRoutes from './PublicRoutes'
 import Products from './pages/Products'
 import About from './pages/About'
+import AdminRoutes from './AdminRoutes'
+import Admin from './pages/Admin/Admin'
+import Staff from './pages/Staff/Staff'
+import StaffRoutes from './StaffRoutes'
+import Addproducts from './pages/Admin/Addproducts'
 
 function App() {
   return (
@@ -21,6 +26,9 @@ function App() {
         <Route path='/home' element={<PrivateRoute><Home/></PrivateRoute>}/>
         <Route path='/products' element={<PrivateRoute><Products/></PrivateRoute>}/>
         <Route path='/about' element={<PrivateRoute><About/></PrivateRoute>}/>
+
+        <Route path='/addProduct' element={<PrivateRoute><AdminRoutes><Addproducts/></AdminRoutes></PrivateRoute>}/>
+        <Route path='/staff' element={<PrivateRoute><StaffRoutes><Staff/></StaffRoutes></PrivateRoute>}/>
       </Route>
     </Routes>
     </>

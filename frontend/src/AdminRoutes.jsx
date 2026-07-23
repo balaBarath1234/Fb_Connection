@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 
 const AdminRoutes = ({children}) => {
 
-    const user = localStorage.getItem("user")
+    const user = JSON.parse(localStorage.getItem("user"))
   return user.role === "admin" ? children : <Navigate to={"/login"}/>
 }
 

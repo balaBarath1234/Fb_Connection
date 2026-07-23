@@ -3,9 +3,7 @@ import axios from "axios"
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
     const [formData , setFormData] = useState({
-        name:"",
         email:"",
         password:""
     })
@@ -21,7 +19,13 @@ const Login = () => {
             localStorage.setItem("token",res.data.token)
             localStorage.setItem("user",JSON.stringify(res.data.data))
 
-            navigate("/home")
+            if(res.data.data.role === "admin"){
+                navigate("/addProduct")
+            }else if(res.data.data.role === "users"){  
+                navigate("/home")
+            }else if(res.data.data.role === "staff"){
+                navigate("/staff")
+            }
             
         } catch (error) {
             console.log(error)

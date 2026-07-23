@@ -31,7 +31,7 @@ export const loginUser = async (req,res) => {
 
         const token = jwt.sign({id:existingUser._id,role:existingUser.role},process.env.JWT_SECRET,{expiresIn:"5m"})
 
-        res.json({data:{id:existingUser._id,name:existingUser.name,email:existingUser.email},token,msg:"Login succesfully"})
+        res.json({data:{id:existingUser._id,name:existingUser.name,email:existingUser.email,role:existingUser.role},token,msg:"Login succesfully"})
     } catch (error) {
         console.log(error)
         res.json({error,msg:"Login Failed"})

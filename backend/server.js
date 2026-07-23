@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import connectDb from "./config/db.js"
 import userRoutes from "./routes/userRoutes.js"
+import productRoutes from "./routes/productRoutes.js"
 
 dotenv.config()
 
@@ -11,6 +12,7 @@ app.use(cors({origin:"http://localhost:5173"}))
 
 app.use(express.json())
 app.use("/users",userRoutes)
+app.use("/products",productRoutes)
 
 connectDb()
 

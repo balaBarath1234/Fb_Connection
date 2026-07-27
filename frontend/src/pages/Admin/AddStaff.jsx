@@ -1,0 +1,68 @@
+import React, { useState } from 'react';
+import axios from "axios"
+import { Link, useNavigate } from 'react-router-dom';
+
+const AddStaff = () => {
+    const navigate = useNavigate()
+    const [formData , setFormData] = useState({
+        name:"",
+        email:"",
+        password:""
+    })
+
+
+    const registerUser = async (e) => {
+        e.preventDefault()
+
+        try {
+            const res = await axios.post("http://localhost:5000/users/register",formData)
+
+            setFormData({
+                name:"",
+                email:"",
+                password:""               
+            })
+
+            alert (res.data.msg)
+
+            navigate("/login")
+        } catch (error) {
+            console.log(error)
+            alert(error)
+        }
+    }
+
+  
+    function handlechange(e){
+        setFormData({
+            ...formData,
+            [e.target.name] : e.target.value,
+            role:"staff"
+        })
+    }
+
+    console.log(formData);
+    
+    return (
+        <div className='form_con'>
+            <h1>Add Staff</h1>
+            <form className='form' onSubmit={registerUser}>
+                <div className='inp'>
+                    <label>Name</label>
+                    <input type='text' name='name' value={formData.name} onChange={handlechange}/>
+                </div>
+                <div className='inp'>
+                    <label>Email</label>
+                    <input type="email" name='email' value={formData.email} onChange={handlechange}/>
+                </div>
+                <div className='inp'>
+                    <label>Password</label>
+                    <input type="Password" name='password' value={formData.password} onChange={handlechange}/>
+                </div>
+                <button>Register</button>
+            </form>
+        </div>
+    );
+}
+
+export default AddStaff;

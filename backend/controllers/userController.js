@@ -33,6 +33,8 @@ export const loginUser = async (req,res) => {
 
         res.cookie("token",token,{httpOnly:true,secure:false,sameSite:"lax",maxAge: 24 * 60 * 60 * 1000})
 
+        console.log(token);
+        
         res.json({msg:"Login succesfully",data:existingUser.role})
     } catch (error) {
         console.log(error)

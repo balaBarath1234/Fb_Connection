@@ -16,8 +16,12 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { setUser } from './redux/Slice/authSlice'
+import AddStaff from './pages/Admin/AddStaff'
+import ProductsList from './pages/Admin/ProductsList'
 function App() {
   const dispatch = useDispatch()
+
+  const [loading,setLoading] = useState(true)
 
   useEffect(() => {
 
@@ -29,10 +33,16 @@ function App() {
         
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false)
       }
     }
     getUser()
   },[])
+
+  if(loading){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <>
@@ -46,7 +56,9 @@ function App() {
         <Route path='/about' element={<PrivateRoute><About/></PrivateRoute>}/>
 
         <Route path='/addProduct' element={<PrivateRoute><AdminRoutes><Addproducts/></AdminRoutes></PrivateRoute>}/>
-        <Route path='/staff' element={<PrivateRoute><StaffRoutes><Staff/></StaffRoutes></PrivateRoute>}/>
+        <Route path='/addStaff' element={<PrivateRoute><AdminRoutes><AddStaff/></AdminRoutes></PrivateRoute>}/>
+        <Route path='/productsList' element={<PrivateRoute><AdminRoutes><ProductsList/></AdminRoutes></PrivateRoute>}/>
+        <Route path='/staff' element={<PrivateRoute><StaffRoutes><Addproducts/></StaffRoutes></PrivateRoute>}/>
       </Route>
     </Routes>
     </>

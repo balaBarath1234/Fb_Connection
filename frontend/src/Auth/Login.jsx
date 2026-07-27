@@ -23,8 +23,17 @@ const Login = () => {
                 const getUser = async () => {
                     try {
                         const res = await axios.get("http://localhost:5000/users/userData",{withCredentials:true})
-                        dispatch(setUser(res.data.data))
+                       
                         console.log(res.data.data);
+
+                        if(res.data.data.role === "admin"){
+                            navigate("/addProduct")
+                        }else if(res.data.data === "users"){  
+                            navigate("/home")
+                        }else if(res.data.data === "staff"){
+                            navigate("/staff")
+                        }
+                         dispatch(setUser(res.data.data))
                         
                     } catch (error) {
                         console.log(error);
@@ -32,13 +41,7 @@ const Login = () => {
                     }
                 getUser()
 
-            if(res.data.data === "admin"){
-                navigate("/addProduct")
-            }else if(res.data.data === "users"){  
-                navigate("/home")
-            }else if(res.data.data === "staff"){
-                navigate("/staff")
-            }
+           
             
         } catch (error) {
             console.log(error)

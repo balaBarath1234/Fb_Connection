@@ -5,9 +5,7 @@ const authMiddleware = (req,res,next) => {
         
         const token = req.cookies.token
 
-        console.log(token);
-        
-
+        console.log("token:",token);
         if(!token) {return res.json("No Token Please Login")}
 
         const decoded = jwt.verify(token,process.env.JWT_SECRET)

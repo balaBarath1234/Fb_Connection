@@ -13,3 +13,13 @@ export const addProduct = async(req,res) => {
         res.json({msg:error.message})
     }
 }
+
+export const getProducts = async(req,res) => {
+    try {
+        const products  = await Product.find()
+
+        res.json({data:products,msg:"Products Recieved"})
+    } catch (error) {
+        res.json({msg:error})
+    }
+}

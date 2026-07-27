@@ -3,11 +3,12 @@ import jwt from "jsonwebtoken"
 const authMiddleware = (req,res,next) => {
     try {
         
-        const auth = req.headers.authorization
+        const token = req.cookies.token
 
-        if(!auth) {return res.json("Invalid or No Token")}
+        console.log(token);
+        
 
-        const token = auth.split(" ")[1]
+        if(!token) {return res.json("No Token Please Login")}
 
         const decoded = jwt.verify(token,process.env.JWT_SECRET)
 
@@ -17,6 +18,7 @@ const authMiddleware = (req,res,next) => {
 
     } catch (error) {
         console.log(error);
+        res.json("Invalid Token")
     }
 }
 

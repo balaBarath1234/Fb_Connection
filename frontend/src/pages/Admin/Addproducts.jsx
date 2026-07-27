@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios"
 import { Link } from 'react-router-dom';
-import { jwtDecode } from "jwt-decode";
 
 const Addproducts = () => {
     const [formData, setFormData] = useState({
@@ -11,26 +10,12 @@ const Addproducts = () => {
     })
 
 
-    const registerUser = async (e) => {
+    const addProduct = async (e) => {
         e.preventDefault()
 
         try {
 
-            const token = localStorage.getItem("token");
-
-            if (token) {
-                const decoded = jwtDecode(token);
-                console.log(decoded);
-                if (decoded.role !== "admin") {
-
-                    return alert("You are not authorized to add products.");
-
-                }
-
-            }
-
-
-            const res = await axios.post("http://localhost:5000/products/addProduct", formData)
+            const res = await axios.post("http://localhost:5000/products/addProduct", formData,{withCredentials:true})
 
             setFormData({
                 title: "",
@@ -57,7 +42,7 @@ const Addproducts = () => {
     return (
         <div className='form_con'>
             <h1>Add Product</h1>
-            <form className='form' onSubmit={registerUser}>
+            <form className='form' onSubmit={addProduct}>
                 <div className='inp'>
                     <label>Title</label>
                     <input type='text' name='title' value={formData.title} onChange={handlechange} />

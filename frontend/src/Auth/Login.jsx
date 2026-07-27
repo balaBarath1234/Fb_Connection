@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from "axios"
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/Slice/authSlice';
 
 const Login = () => {
+    const dispatch = useDispatch()
     const [formData , setFormData] = useState({
         email:"",
         password:""
@@ -14,21 +17,32 @@ const Login = () => {
         e.preventDefault()
 
         try {
-            const res = await axios.post("http://localhost:5000/users/login",formData)
+            const res = await axios.post("http://localhost:5000/users/login",formData,{withCredentials:true})
             alert (res.data.msg)
-            localStorage.setItem("token",res.data.token)
-            localStorage.setItem("user",JSON.stringify(res.data.data))
 
-            if(res.data.data.role === "admin"){
+                const getUser = async () => {
+                    try {
+                        const res = await axios.get("http://localhost:5000/users/userData",{withCredentials:true})
+                        dispatch(setUser(res.data.data))
+                        console.log(res.data.data);
+                        
+                    } catch (error) {
+                        console.log(error);
+                    }
+                    }
+                getUser()
+
+            if(res.data.data === "admin"){
                 navigate("/addProduct")
-            }else if(res.data.data.role === "users"){  
+            }else if(res.data.data === "users"){  
                 navigate("/home")
-            }else if(res.data.data.role === "staff"){
+            }else if(res.data.data === "staff"){
                 navigate("/staff")
             }
             
         } catch (error) {
             console.log(error)
+            alert(error)
         }
     }
     function handlechange(e){

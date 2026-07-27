@@ -31,16 +31,18 @@ export const loginUser = async (req,res) => {
 
         const token = jwt.sign({id:existingUser._id,role:existingUser.role},process.env.JWT_SECRET,{expiresIn:"5m"})
 
-        res.json({data:{id:existingUser._id,name:existingUser.name,email:existingUser.email,role:existingUser.role},token,msg:"Login succesfully"})
+        res.cookie("token",token,{httpOnly:true,secure:false,sameSite:"lax",maxAge: 24 * 60 * 60 * 1000})
+
+        res.json({msg:"Login succesfully",data:existingUser.role})
     } catch (error) {
         console.log(error)
         res.json({error,msg:"Login Failed"})
     }
 }
 
-export const getUsers = async (req,res) => {
+export const getUser = async (req,res) => {
     try {
-        const user = await Users.find()
+        const user = await Users.findById(req.user.id).select("-password")
         res.json({data:user})
 
     } catch (error) {
@@ -49,11 +51,10 @@ export const getUsers = async (req,res) => {
     }
 }
 
-export const getUser = async (req,res) => {
+export const logoutUser = async (req,res) => {
     try {
-        const user = await Users.findById(req.user.id)
-        res.json({data:user})
-
+        res.clearCookie("token")
+        res.json({msg:"Logout Successfully"})
     } catch (error) {
         console.log(error)
         res.json(error)

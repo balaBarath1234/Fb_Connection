@@ -5,6 +5,6 @@ import { addProduct } from "../controllers/productController.js"
 
 const router = express.Router()
 
-router.post("/addProduct",roleMiddleware("admin"),addProduct)
+router.post("/addProduct",authMiddleware,roleMiddleware("admin"),addProduct)
 
 export default router

@@ -1,21 +1,39 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Navbar from './Navbar'
-import Register from './Register'
-import Login from './Login'
+import Register from './Auth/Register'
+import Login from './Auth/Login'
 import Layout from './Layout'
-import Home from './pages/Home'
-import PrivateRoute from './PrivateRoute'
-import PublicRoutes from './PublicRoutes'
-import Products from './pages/Products'
-import About from './pages/About'
-import AdminRoutes from './AdminRoutes'
-import Admin from './pages/Admin/Admin'
-import Staff from './pages/Staff/Staff'
-import StaffRoutes from './StaffRoutes'
-import Addproducts from './pages/Admin/Addproducts'
-
+import PublicRoutes from './Routes/PublicRoutes'
+import PrivateRoute from './Routes/PrivateRoute'
+import AdminRoutes from './Routes/AdminRoutes'
+import StaffRoutes from './Routes/StaffRoutes'
+import Home from "./pages/User/Home"
+import Products from "./pages/User/Products"
+import About from './pages/All/About'
+import Addproducts from "./pages/Admin/Addproducts"
+import Staff from "./pages/Staff/Staff"
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { setUser } from './redux/Slice/authSlice'
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+
+    const getUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/users/userData",{withCredentials:true})
+        dispatch(setUser(res.data.data))
+        console.log(res.data.data);
+        
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getUser()
+  },[])
+
   return (
     <>
     <Routes>

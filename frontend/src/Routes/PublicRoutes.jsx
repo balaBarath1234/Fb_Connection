@@ -1,12 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
 const PublicRoutes = ({children}) => {
-    const token = localStorage.getItem("token")
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
 
-    const user = JSON.parse(localStorage.getItem("user"))
+    const user = useSelector(state => state.auth.user) 
 
-  return token ? 
+  return isAuthenticated ? 
   user?.role === "admin" ? <Navigate to="/addProduct"/> 
   : user?.role === "staff" ? <Navigate to="/staff"/> 
   : user?.role === "users" ? <Navigate to="/home"/>: children : children

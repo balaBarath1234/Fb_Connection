@@ -8,8 +8,8 @@ export const addProduct = async(req,res) => {
 
         const newProduct = await Product.create(req.body)
 
-        res.json({message:"Product added successfully",data:newProduct})
+        res.json({msg:"Product added successfully",data:newProduct})
     }catch(error){
-        res.json({message:error.message})
+        res.json({msg:error.message})
     }
 }

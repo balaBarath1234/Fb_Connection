@@ -29,6 +29,7 @@ const Navbar = () => {
         {name:"Add Product",path:"/addProduct",access:["staff","admin"]},
         {name:"Add Staff",path:"/addStaff",access:["admin"]},
         {name:"Products List",path:"/productsList",access:["staff","admin"]},
+        {name:"Staff List",path:"/staffList",access:["admin"]},
         {name:"About",path:"/about",access:["all"]},
     ]
     return (

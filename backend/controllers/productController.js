@@ -23,3 +23,54 @@ export const getProducts = async(req,res) => {
         res.json({msg:error})
     }
 }
+
+export const getProductById = async (req,res) => {
+    try {
+        const {id} = req.params
+        
+        const product = await Product.findById(id)
+
+        if(!product) {return res.json({msg:"No Product"})}
+
+        res.json({data:product})
+    } catch (error) {
+        console.log(error)
+        res.json({msg:error})
+    }
+}
+
+export const updateProduct = async (req,res) => {
+    try {
+
+        console.log("c");
+        
+        const {id} = req.params
+
+        const product = await Product.findById(id)
+
+        if(!product) {return res.json({msg:"No Product"})}
+
+        const updatedProduct = await Product.findByIdAndUpdate({_id:id},req.body)
+
+        res.json({msg:"Updated Successfully",data:updatedProduct})
+    } catch (error) {
+        console.log(error)
+        res.json({msg:error})
+    }
+}
+
+export const deleteProduct = async(req,res) => {
+    try {
+        const {id} = req.params
+
+        const product = await Product.findById(id)
+
+        if(!product) {return res.json({msg:"No Product"})}
+
+        await Product.findByIdAndDelete({_id:id})
+
+        res.json({msg:"Deleted Successfully"})
+    } catch (error) {
+        res.json({msg:error})
+    }
+}

@@ -29,7 +29,7 @@ export const loginUser = async (req,res) => {
 
         if(!match) {return res.status(401).json("Invalid Paasword")}
 
-        const token = jwt.sign({id:existingUser._id,role:existingUser.role},process.env.JWT_SECRET,{expiresIn:"5m"})
+        const token = jwt.sign({id:existingUser._id,role:existingUser.role},process.env.JWT_SECRET,{expiresIn:"1h"})
 
         res.cookie("token",token,{httpOnly:true,secure:false,sameSite:"lax",maxAge: 24 * 60 * 60 * 1000})
 

@@ -1,3 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+#root{
+  flex: 1;
+}
 .form{
   display: flex;
   flex-direction: column;
@@ -53,4 +66,44 @@ button{
 
 .inactive{
   color: black;
+}
+
+.table_con{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 40px;
+  gap: 10px;
+}
+
+.lay_div{
+  height: 100%;
+}
+
+.table_list{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table_list , th , td{
+  border: 1px solid lightblue;
+}
+th,td{
+  padding: 10px;
+}
+.btn_td{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.edit_btn{
+  background-color: lightsteelblue;
+}
+
+.del_btn{
+  background-color: red;
+  color: whitesmoke;
 }

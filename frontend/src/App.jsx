@@ -56,6 +56,7 @@ function App() {
         <Route path='/about' element={<PrivateRoute><About/></PrivateRoute>}/>
 
         <Route path='/addProduct' element={<PrivateRoute><AdminRoutes><Addproducts/></AdminRoutes></PrivateRoute>}/>
+        <Route path='/addProduct/:id' element={<PrivateRoute><AdminRoutes><Addproducts/></AdminRoutes></PrivateRoute>}/>
         <Route path='/addStaff' element={<PrivateRoute><AdminRoutes><AddStaff/></AdminRoutes></PrivateRoute>}/>
         <Route path='/productsList' element={<PrivateRoute><AdminRoutes><ProductsList/></AdminRoutes></PrivateRoute>}/>
         <Route path='/staff' element={<PrivateRoute><StaffRoutes><Addproducts/></StaffRoutes></PrivateRoute>}/>

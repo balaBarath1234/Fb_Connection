@@ -70,8 +70,6 @@ const Addproducts = () => {
         })
     }
 
-    console.log(formData);
-
     return (
         <div className='form_con'>
             <h1>Add Product</h1>

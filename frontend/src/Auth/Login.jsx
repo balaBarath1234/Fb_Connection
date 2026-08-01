@@ -24,16 +24,15 @@ const Login = () => {
                     try {
                         const res = await axios.get("http://localhost:5000/users/userData",{withCredentials:true})
                        
-                        console.log(res.data.data);
+                        dispatch(setUser(res.data.data))
 
                         if(res.data.data.role === "admin"){
                             navigate("/addProduct")
-                        }else if(res.data.data === "users"){  
+                        }else if(res.data.data.role === "users"){  
                             navigate("/home")
-                        }else if(res.data.data === "staff"){
-                            navigate("/staff")
+                        }else if(res.data.data.role === "staff"){
+                            navigate("/addProduct")
                         }
-                         dispatch(setUser(res.data.data))
                         
                     } catch (error) {
                         console.log(error);
@@ -54,9 +53,6 @@ const Login = () => {
             [e.target.name] : e.target.value
         })
     }
-
-    console.log(formData);
-    
     return (
         <div className='form_con'>
             <h1>Login</h1>

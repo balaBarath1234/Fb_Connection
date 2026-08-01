@@ -62,3 +62,57 @@ export const logoutUser = async (req,res) => {
         res.json(error)
     }
 }
+
+export const getStaff = async(req,res) =>{
+    try {
+        const staff = await Users.find({role:"staff"}).select("-password")
+
+        res.json({data:staff})
+    } catch (error) {
+        console.log(error);
+        res.json({msg:error})
+    }
+}
+
+export const updateUser = async (req,res) => {
+    try {
+        const {id} = req.params
+        console.log(req.body);
+    
+        const user = await Users.findByIdAndUpdate({_id:id},req.body)
+
+        res.json({msg:"Updated Successfully",data:user})
+    } catch (error) {
+        console.log(error);
+        res.json({msg:error})
+    }
+}
+
+export const getuserById = async (req,res) => {
+    try {
+        const {id} = req.params
+        
+        const user = await Users.findById({_id:id})
+
+        if(!user) {return res.json({msg:"No User Found"})}
+
+        res.json({data:user})
+    } catch (error) {
+        res.json({msg:error})
+    }
+}
+
+export const deleteUser = async(req,res) => {
+    try {
+        const {id} = req.params
+
+        const user = await Users.findById({_id:id})
+        if(!user){return res.json({msg:"No User Found"})}
+
+        await Users.findByIdAndDelete(id)
+
+        res.json({msg:"Deleted Successfully"})
+    } catch (error) {
+        res.json({msg:error})
+    }
+}

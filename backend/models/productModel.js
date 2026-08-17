@@ -17,7 +17,13 @@ const productsSchema = new mongoose.Schema({
         type:Number,
         required:true,
         default:1
-    }
+    },
+    mainImage:{
+        type:String,
+    },
+    subImages:[{
+        type:String
+    }]
 },{
     timestamps:true
 })

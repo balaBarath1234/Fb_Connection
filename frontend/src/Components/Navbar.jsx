@@ -14,7 +14,7 @@
         const navigate = useNavigate()
             const logOut = async () => {
                 try {
-                    const res = await axios.post("http://localhost:5000/users/logout",{},{withCredentials:true  })
+                    const res = await axios.post("http://localhost:5000/users/logout",{},{withCredentials:true})
                     dispatch(removeUser())
                     navigate("/login")
                 } catch (error) {

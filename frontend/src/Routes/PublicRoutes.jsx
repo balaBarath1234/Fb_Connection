@@ -8,9 +8,9 @@ const PublicRoutes = ({children}) => {
     const user = useSelector(state => state.auth.user) 
 
 
-  return isAuthenticated ? 
+  return isAuthenticated && 
   user?.role === "admin" || user?.role === "staff" ? <Navigate to="/addProduct"/> 
-  : user?.role === "users" ? <Navigate to="/home"/>: children : children
+  : user?.role === "users" ? <Navigate to="/home"/>: children 
 }
 
 export default PublicRoutes

@@ -26,7 +26,6 @@ function App() {
   const [loading,setLoading] = useState(true)
 
   useEffect(() => {
-
     const getUser = async () => {
       try {
         const res = await axios.get("http://localhost:5000/users/userData",{withCredentials:true})
